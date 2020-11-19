@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>{{{title}}}</title>
+    <link rel="stylesheet" type="text/css" href="http://lot23.com/play/enthusiasticpanther/style.css"/> 
+    <style>
+    TH, TD
+      {
+        float: left;
+      }
+      
+      THEAD TR
+      {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h2>{{title}}</h2>
+        
+  <table>
+    <thead>
+      <tr>
+      <td>ID</td>  
+      <td>Song</td>  
+      <td># Played</td>  
+      <td>Gap</td>
+      <td>Quality</td>
+      </tr>
+    </thead>
+    
+      <tbody>
+        {{#each songData}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.name}}</td>   
+        <td>{{this.totalperformances}}</td> 
+        <td>{{this.gap}}</td>  
+        <td>{{this.averagequality}}</td>    
+      </tr>
+        {{/each}}
+    </tbody>
+    
+    
+  </table>
+    
+  </body>
+</html>

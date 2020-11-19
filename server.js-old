@@ -1,0 +1,62 @@
+// server.js
+// where your node app starts
+
+// init project
+const express = require("express");
+var bodyParser = require("body-parser");
+
+var app = express();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+var handlebars = require("express-handlebars");
+app.engine("handlebars", handlebars({ defaultLayout: "home" }));
+app.set("view engine", "handlebars");
+
+var mysql = require("mysql");
+app.get("/", function(req, res) {
+  var con = mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DBNAME,
+    port: "3306"
+  });
+
+  con.connect(err => {
+    if (err) {
+      console.log(`Wasn't able to connect to mysql db`);
+      console.log(err);
+      res.send(err);
+    } else {
+      console.log(`Successfully connected to mysql`);
+      // res.send(`Connect To Mysql`);
+      con.query("SELECT * FROM enthusiasticpanther_songs", function(
+        err,
+        results,
+        fields
+      ) {
+        if (err) throw err;
+        console.log(results);
+        
+        // results 
+        
+        
+        res.render("home", {
+          title: "This is a title",
+          results: results
+        });
+        
+      });
+    }
+
+    
+    
+    
+    
+  });
+});
+
+// listen for requests :)
+const listener = app.listen(process.env.PORT, function() {
+  console.log("Your app is listening on port " + listener.address().port);
+});
