@@ -1,6 +1,11 @@
 // server.js
 // where your node app starts
 
+require('dotenv').config()
+
+console.log('Init');
+console.log(process.env.MYSQL_HOST)
+
 // init project
 const express = require("express");
 var bodyParser = require("body-parser");
@@ -83,7 +88,6 @@ app.get("/", function(req, res) {
               
               
              // console.log(allSongData);
-              
               res.render("home", {
                 songData: allSongData
               });
@@ -96,6 +100,6 @@ app.get("/", function(req, res) {
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
-  console.log("Your app is listening on port " + listener.address().port);
-});
+ const listener = app.listen(process.env.PORT, function() {
+   console.log("Your app is listening on port " + listener.address().port);
+ });
